@@ -1,0 +1,7 @@
+sample,otsu_threshold,intermeans_threshold,otsu_error_percent,intermeans_error_percent
+detail,156,100,0.000000,54.735795
+small,64,152,51.796875,0.000000
+balanced,105,119,0.000000,0.000000
+impulse,65,131,6.017045,6.017045
+salt,95,162,61.559659,61.559659
+pepper,120,79,4.221591,61.559659

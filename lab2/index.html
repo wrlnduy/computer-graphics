@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Лабораторная работа 2 — обработка изображений</title>
+<link rel="stylesheet" href="style.css">
+<script src="processing.js" defer></script><script src="samples.js" defer></script><script src="app.js" defer></script>
+</head>
+<body><main>
+<header><div><p class="eyebrow">Компьютерная графика / Лабораторная работа 02</p><h1>От яркости к форме</h1><p class="intro">Глобальные пороги и нелинейная фильтрация · Вариант 10</p></div>
+<label class="upload">Открыть изображение<input id="file" type="file" accept="image/*"></label></header>
+<section class="sample-section" aria-labelledby="samples-title"><div class="section-line"><h2 id="samples-title">Набор для исследования</h2><span>6 примеров с известным эталоном</span></div><div id="samples" class="samples"></div></section>
+<div class="workspace"><aside>
+<section class="settings"><p class="eyebrow">Параметры обработки</p><h2>1. Удаление шума</h2>
+<label for="filter">Нелинейный фильтр</label><select id="filter"><option value="none">Без фильтра</option><option value="median">Медианный</option><option value="min">Минимальный</option><option value="max">Максимальный</option></select>
+<label for="size">Размер окна</label><select id="size"><option value="3">3 × 3</option><option value="5">5 × 5</option><option value="7">7 × 7</option></select>
+<p class="help" id="filter-help">Пороговая обработка исходного полутонового изображения.</p>
+<h2>2. Выделение объекта</h2><label class="check"><input id="invert" type="checkbox"> Объект темнее фона</label>
+<p class="help">Порог разделяет изображение на два класса. Объект показан белым, фон — чёрным.</p>
+<button id="reset" class="secondary">Сбросить параметры</button>
+</section>
+<section class="note"><h2 id="source-name">Объект с деталями</h2><p id="sample-note"></p><p id="dimensions" class="dimensions"></p><p id="quality" class="quality"></p></section>
+<details><summary>Что сравниваем</summary><p>Оцу выбирает порог с максимальным различием средних яркостей классов с учётом их размеров. Итеративное среднее уточняет порог как полусумму средних двух классов.</p><p>Медиана подавляет «соль и перец». Минимум удаляет светлые импульсы и расширяет тёмные области, максимум — наоборот. На границе изображения повторяется ближайший пиксель.</p></details>
+</aside>
+<div class="results"><p id="status" class="status" role="status" aria-live="polite">Подготовка изображения…</p>
+<div class="image-grid">
+<section class="image-panel"><div class="panel-head"><div><span class="step">01 / ВХОД</span><h2>Полутоновое исходное</h2></div><button class="download" data-canvas="original" aria-label="Скачать исходное изображение">PNG ↓</button></div><canvas id="original" aria-label="Исходное полутоновое изображение" role="img"></canvas><p class="panel-foot">Общий исходник для всех способов обработки</p></section>
+<section class="image-panel"><div class="panel-head"><div><span class="step">02 / ФИЛЬТР</span><h2 id="filtered-title">Без фильтра</h2></div><button class="download" data-canvas="filtered" aria-label="Скачать результат фильтрации">PNG ↓</button></div><canvas id="filtered" aria-label="Изображение после нелинейной фильтрации" role="img"></canvas><p id="filter-metric" class="panel-foot"></p></section>
+<section class="image-panel"><div class="panel-head"><div><span class="step otsu">03 / ГЛОБАЛЬНЫЙ ПОРОГ</span><h2>Метод Оцу <span id="otsu-threshold" class="threshold"></span></h2></div><button class="download" data-canvas="otsu" aria-label="Скачать результат Оцу">PNG ↓</button></div><canvas id="otsu" aria-label="Бинаризация методом Оцу" role="img"></canvas><p id="otsu-metric" class="panel-foot"></p></section>
+<section class="image-panel"><div class="panel-head"><div><span class="step">04 / ГЛОБАЛЬНЫЙ ПОРОГ</span><h2>Итеративное среднее <span id="iter-threshold" class="threshold"></span></h2></div><button class="download" data-canvas="iter" aria-label="Скачать результат итеративного среднего">PNG ↓</button></div><canvas id="iter" aria-label="Бинаризация методом итеративного среднего" role="img"></canvas><p id="iter-metric" class="panel-foot"></p></section>
+</div>
+<section class="histogram-panel"><div class="section-line"><h2>Гистограмма яркости после фильтра</h2><span><b class="legend orange">Оцу</b> <b class="legend teal">Среднее</b></span></div><canvas id="histogram" width="768" height="135" role="img" aria-label="Гистограмма яркости с порогами двух методов"></canvas><div class="axis"><span>0 · чёрный</span><span>128</span><span>255 · белый</span></div></section>
+</div></div>
+<footer>Изображения обрабатываются локально · Кликните PNG, чтобы сохранить результат · Для собственных изображений эталонные метрики недоступны</footer>
+</main></body></html>
