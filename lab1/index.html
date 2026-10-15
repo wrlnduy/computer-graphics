@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Цветовые модели — лабораторная работа 1</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="color.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header><div><p class="eyebrow">Компьютерная графика / Лабораторная работа 01</p>
+  <h1>Один цвет. Три модели.</h1><p class="intro">Исследуйте цвет в CMYK, RGB и HSV. Все значения связаны и обновляются сразу.</p></div>
+  <button id="reset" class="secondary">Сбросить цвет ↺</button></header>
+  <section class="overview" aria-label="Текущий цвет">
+    <div id="preview" class="preview"><span id="preview-label">Текущий цвет</span></div>
+    <div class="color-info"><p class="eyebrow">Чётный вариант · CMYK / RGB / HSV</p>
+      <h2>Выберите отправную точку</h2>
+      <div class="quick-input"><label for="hex">HEX <input id="hex" value="#3473EB" maxlength="7" spellcheck="false" aria-describedby="hex-help"></label>
+      <label class="picker-label">Системная палитра <input id="picker" type="color" value="#3473eb" aria-label="Открыть системную палитру"></label></div>
+      <p id="hex-help" class="help">HEX: #RRGGBB. В каждой модели доступны поля, ползунки и двумерная палитра.</p>
+      <div id="swatches" class="swatches" aria-label="Готовые цвета"></div>
+    </div>
+  </section>
+  <p id="status" class="status" role="status" aria-live="polite">Готово к работе</p>
+  <div id="models" class="models"></div>
+  <footer><span>RGB: 0–255 · CMYK: 0–100% · HSV: 0–360° / 0–100%</span>
+    <span>CMYK рассчитан по упрощённой модели без ICC-профиля печати.</span></footer>
+</main>
+</body></html>
